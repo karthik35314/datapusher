@@ -1,0 +1,3 @@
+MONGO_URL = mongodb+srv://karthik_204:test@cluster0.6z5m2kk.mongodb.net/account?retryWrites=true&w=majority
+PORT = 5000
+SECRET = karthik

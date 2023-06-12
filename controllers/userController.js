@@ -1,20 +1,7 @@
 const asyncHandler = require("express-async-handler");
 const User = require("../models/UserModel");
 const Destination = require("../models/destinationModel");
-//@desc Get all User
-//@route GET /api/User
-//@access private
-const getUsers = asyncHandler(async (req, res) => {
-  console.log("The request body is :", req.body);
-  try{
-    const User = await User.find({ userid: req.user.id });
-  res.status(200).json(User);
 
-
-  }catch (err) {
-    res.status(500).json(err)
-}
-});
 
 //@desc Create New user
 //@route POST /api/User
@@ -48,9 +35,6 @@ const createUser = asyncHandler(async (req, res) => {
 const getUser = asyncHandler(async (req, res) => {
  try{
   const user = await User.findById(req.params.id);
-  // const Destination = await Destination.findById(req.params.id);
-  await Destination.delete({ userid:374 });
-console.log("delete")
   res.status(200).json(user);
  }catch(err){
   res.status(404).json(err);
@@ -87,6 +71,7 @@ const deleteUser = asyncHandler(async (req, res) => {
  try {
   const user = await User.findById(req.params.id);
   await User.deleteOne({ _id: req.params.id });
+  await Destination.remove({userid:req.body})
   res.status(200).json(user);
   
  } catch (err) {
@@ -97,7 +82,6 @@ const deleteUser = asyncHandler(async (req, res) => {
 
 module.exports = {
   getUser,
-  getUsers,
   createUser,
   updateUser,
   deleteUser,

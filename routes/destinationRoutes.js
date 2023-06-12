@@ -8,9 +8,7 @@ const {
 } = require("../controllers/destinationController");
 const validateToken = require("../middlewares/validateTokenHandler");
 
-// router.route("/").post(createDestination);
-// router.use(validateToken);
-console.log("rours")
+router.use(validateToken);
 router.route("/").post(createDestination);
 router.route("/:id").get(getDestination).put(updateDestination);
 router.route("/").delete(deleteDestination);

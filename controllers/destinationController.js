@@ -1,13 +1,11 @@
 const asyncHandler = require("express-async-handler");
 const Destination = require("../models/destinationModel");
-const { json } = require("body-parser");
 
 
 //@desc Create New Destination
 //@route POST /api/Destination
 //@access private
 const createDestination = asyncHandler(async (req, res) => {
-  console.log("The request body is :", req.headers.authorization);
  
     try {
         const newDestination = Destination({
@@ -35,10 +33,7 @@ const createDestination = asyncHandler(async (req, res) => {
 const getDestination = asyncHandler(async (req, res) => {
  try{
   const destination = await Destination.find({userid: req.params.id})
-  // if(destination){
-    console.log(req.params.id,"get")
     res.status(200).json(destination);
-  // }
 
  }catch(err){
   res.status(404).json(err);
@@ -73,12 +68,9 @@ const updateDestination = asyncHandler(async (req, res) => {
 //@access private
 const deleteDestination = asyncHandler(async (req, res) => {
   console.log("deleted",req.body)
-
+const {userid}=req.body
  try {
-  // await Destination.deleteOne({userid:"13"})
-  Destination.deleteOne({_id:"6486aea3306f8bacaccac2bb"})
-  console.log("over")
-  // res.status(200).json("destination");
+  Destination.remove( userid)
   
  } catch (err) {
   res.status(404).json(err)

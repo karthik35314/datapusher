@@ -10,9 +10,7 @@ const {
 const validateToken = require("../middlewares/validateTokenHandler");
 
 router.route("/").post(createUser);
-// router.use(validateToken);
-console.log("rours")
-router.route("/").get(getUsers).post(createUser);
+router.use(validateToken);
 router.route("/:id").get(getUser).put(updateUser).delete(deleteUser);
 
 module.exports = router;

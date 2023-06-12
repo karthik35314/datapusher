@@ -22,7 +22,7 @@ const validateToken = asyncHandler(async (req, res, next) => {
   }
 }catch (err) {
 
-    res.status(401).json(("User is not authorized"));
+    res.status(500).json(("internal server error"));
     
   }
  
